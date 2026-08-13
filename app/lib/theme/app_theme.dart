@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
@@ -6,11 +7,10 @@ class AppTheme {
     return ThemeData(
       primaryColor: AppColors.brandNavy,
       scaffoldBackgroundColor: AppColors.pageLight,
-      fontFamily: 'Poppins',
+      textTheme: GoogleFonts.outfitTextTheme(),
       colorScheme: const ColorScheme.light(
         primary: AppColors.brandNavy,
         secondary: AppColors.brandOrange,
-        background: AppColors.pageLight,
         surface: AppColors.surfaceLight,
         error: AppColors.error,
       ),
@@ -29,7 +29,7 @@ class AppTheme {
           ),
           padding: const EdgeInsets.symmetric(vertical: 16),
           elevation: 4,
-          shadowColor: AppColors.brandOrange.withOpacity(0.4),
+          shadowColor: AppColors.brandOrange.withValues(alpha: 0.4),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -56,11 +56,10 @@ class AppTheme {
     return ThemeData(
       primaryColor: AppColors.brandNavy,
       scaffoldBackgroundColor: AppColors.pageDark,
-      fontFamily: 'Poppins',
+      textTheme: GoogleFonts.outfitTextTheme(ThemeData.dark().textTheme),
       colorScheme: const ColorScheme.dark(
         primary: AppColors.brandOrange,
         secondary: AppColors.brandOrange,
-        background: AppColors.pageDark,
         surface: AppColors.surfaceDark,
         error: AppColors.error,
       ),

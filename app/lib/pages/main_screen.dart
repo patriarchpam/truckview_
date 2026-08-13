@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:truckview_mvp/theme/app_colors.dart';
 
 import 'home.dart';
 import 'services.dart';
@@ -26,6 +27,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final navBg = isDark ? AppColors.navDark : AppColors.brandNavy;
+
     return Scaffold(
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300),
@@ -36,11 +40,11 @@ class _MainScreenState extends State<MainScreen> {
         margin: const EdgeInsets.all(12),
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: const Color(0xFF0A1F44),
+          color: navBg,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
@@ -62,9 +66,9 @@ _buildNavItem(Icons.person, "Profile", 4),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-  backgroundColor: const Color(0xFFFF7A00),
-  elevation: 8,
-  child: const Icon(
+        backgroundColor: AppColors.brandOrange,
+        elevation: 8,
+        child: const Icon(
     Icons.add,
     color: Colors.white,
     size: 32,
@@ -95,7 +99,7 @@ floatingActionButtonLocation:
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: isActive
-              ? const Color(0xFFFF7A00).withOpacity(0.2)
+              ? AppColors.brandOrange.withValues(alpha: 0.2)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
@@ -110,7 +114,7 @@ floatingActionButtonLocation:
               child: Icon(
                 icon,
                 color: isActive
-                    ? const Color(0xFFFF7A00)
+                    ? AppColors.brandOrange
                     : Colors.white70,
               ),
             ),
@@ -122,7 +126,7 @@ floatingActionButtonLocation:
               style: TextStyle(
                 fontSize: 11,
                 color: isActive
-                    ? const Color(0xFFFF7A00)
+                    ? AppColors.brandOrange
                     : Colors.white70,
                 fontWeight:
                     isActive ? FontWeight.bold : FontWeight.normal,

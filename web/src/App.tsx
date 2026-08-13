@@ -1,57 +1,69 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
-import { PhoneFrame } from './components/PhoneFrame'
-import { BottomNav } from './components/BottomNav'
-import { ThemeProvider } from './components/ThemeContext'
-import { SplashScreen } from './pages/SplashScreen'
-import { LoginScreen } from './pages/LoginScreen'
-import { RegisterScreen } from './pages/RegisterScreen'
-import { ForgotPassword } from './pages/ForgotPassword'
-import { OtpScreen } from './pages/OtpScreen'
-import { ResetPassword } from './pages/ResetPassword'
-import { Dashboard } from './pages/Dashboard'
-import { ServiceRequest } from './pages/ServiceRequest'
-import { ContactScreen } from './pages/ContactScreen'
-import { ProfileScreen } from './pages/ProfileScreen'
-import { LogoutScreen } from './pages/LogoutScreen'
-import { CallScreen } from './pages/CallScreen'
-import { WhatsAppChat } from './pages/WhatsAppChat'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-function AppRoutes() {
-  const location = useLocation()
-  const showBottomNav = ['/dashboard', '/request', '/contact', '/profile'].includes(location.pathname)
-
-  return (
-    <>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<SplashScreen />} />
-          <Route path="/login" element={<LoginScreen />} />
-          <Route path="/register" element={<RegisterScreen />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/verify-otp" element={<OtpScreen />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/request" element={<ServiceRequest />} />
-          <Route path="/contact" element={<ContactScreen />} />
-          <Route path="/profile" element={<ProfileScreen />} />
-          <Route path="/logout" element={<LogoutScreen />} />
-          <Route path="/call" element={<CallScreen />} />
-          <Route path="/whatsapp" element={<WhatsAppChat />} />
-        </Routes>
-      </AnimatePresence>
-      {showBottomNav && <BottomNav />}
-    </>
-  )
-}
+import { AppToaster } from './components/AppToaster'
+import { AdminLayout } from './components/admin/AdminLayout'
+import { PublicLayout } from './components/PublicLayout'
+import { AuthProvider } from './contexts/AuthContext'
+import { StoreProvider } from './contexts/StoreContext'
+import { SubscriptionProvider } from './contexts/SubscriptionContext'
+import { ThemeProvider } from './contexts/ThemeContext'
+import { About } from './pages/About'
+import { BookService } from './pages/BookService'
+import { BookingLookup } from './pages/BookingLookup'
+import { Contact } from './pages/Contact'
+import { Home } from './pages/Home'
+import { NotFound } from './pages/NotFound'
+import { Pricing } from './pages/Pricing'
+import { Services } from './pages/Services'
+import { VehicleTypes } from './pages/VehicleTypes'
+import { AdminAvailability } from './pages/admin/AdminAvailability'
+import { AdminBookings } from './pages/admin/AdminBookings'
+import { AdminContent } from './pages/admin/AdminContent'
+import { AdminCustomers } from './pages/admin/AdminCustomers'
+import { AdminDashboard } from './pages/admin/AdminDashboard'
+import { AdminLogin } from './pages/admin/AdminLogin'
+import { AdminServices } from './pages/admin/AdminServices'
+import { AdminSettings } from './pages/admin/AdminSettings'
+import { AdminVehicleTypes } from './pages/admin/AdminVehicleTypes'
 
 export function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <PhoneFrame><AppRoutes /></PhoneFrame>
-      </Router>
+      <StoreProvider>
+        <AuthProvider>
+          <SubscriptionProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route element={<PublicLayout />}>
+                  <Route index element={<Home />} />
+                  <Route path="services" element={<Services />} />
+                  <Route path="vehicle-types" element={<VehicleTypes />} />
+                  <Route path="pricing" element={<Pricing />} />
+                  <Route path="about" element={<About />} />
+                  <Route path="contact" element={<Contact />} />
+                  <Route path="book" element={<BookService />} />
+                  <Route path="booking" element={<BookingLookup />} />
+                  <Route path="*" element={<NotFound />} />
+                </Route>
+
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="bookings" element={<AdminBookings />} />
+                  <Route path="services" element={<AdminServices />} />
+                  <Route path="vehicle-types" element={<AdminVehicleTypes />} />
+                  <Route path="availability" element={<AdminAvailability />} />
+                  <Route path="customers" element={<AdminCustomers />} />
+                  <Route path="content" element={<AdminContent />} />
+                  <Route path="settings" element={<AdminSettings />} />
+                </Route>
+              </Routes>
+              <AppToaster />
+            </BrowserRouter>
+          </SubscriptionProvider>
+        </AuthProvider>
+      </StoreProvider>
     </ThemeProvider>
   )
 }

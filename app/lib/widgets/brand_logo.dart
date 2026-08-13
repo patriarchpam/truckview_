@@ -1,39 +1,48 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
+
+enum LogoSize { mini, compact, full }
 
 class BrandLogo extends StatelessWidget {
-  final double width;
-  final double height;
+  final LogoSize size;
 
-  const BrandLogo({super.key, this.width = 140, this.height = 90});
+  const BrandLogo({super.key, this.size = LogoSize.compact});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final double height = switch (size) {
+      LogoSize.mini => 44,
+      LogoSize.compact => 80,
+      LogoSize.full => 140,
+    };
+
     return Container(
-      width: width,
       height: height,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF0A1F44), width: 1.5),
-        boxShadow: const [
+        border: Border.all(
+          color: isDark ? AppColors.borderDark : AppColors.brandNavy,
+          width: 1.5,
+        ),
+        boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: isDark ? Colors.black26 : Colors.black12,
             blurRadius: 10,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-      padding: const EdgeInsets.all(8),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(6),
-        child: Image.network(
-          'https://cdn.magicpatterns.com/uploads/uesRGfbYRmZKB7thKWepJ2/image.png',
-          fit: BoxFit.contain,
-          errorBuilder: (_, __, ___) => const Icon(
-            Icons.local_shipping,
-            size: 40,
-            color: Color(0xFF0A1F44),
-          ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Image.asset(
+        'assets/truck_logo.png',
+        fit: BoxFit.contain,
+        errorBuilder: (_, __, ___) => const Icon(
+          Icons.local_shipping,
+          size: 36,
+          color: AppColors.brandNavy,
         ),
       ),
     );

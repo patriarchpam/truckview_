@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
           child: Column(
             children: [
-              const BrandLogo(),
+              const BrandLogo(size: LogoSize.compact),
               const SizedBox(height: 28),
               Text(
                 'Welcome back',
@@ -86,18 +86,21 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.error.withOpacity(0.1),
+                    color: AppColors.error.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.error.withOpacity(0.3)),
+                    border: Border.all(
+                        color: AppColors.error.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.error_outline, color: AppColors.error, size: 18),
+                      const Icon(Icons.error_outline,
+                          color: AppColors.error, size: 18),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           _errorMessage!,
-                          style: const TextStyle(color: AppColors.error, fontSize: 13),
+                          style: const TextStyle(
+                              color: AppColors.error, fontSize: 13),
                         ),
                       ),
                     ],
@@ -129,11 +132,14 @@ class _LoginPageState extends State<LoginPage> {
                 isDark: isDark,
                 suffix: IconButton(
                   icon: Icon(
-                    _hidePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                    _hidePassword
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                     color: isDark ? AppColors.mutedDark : AppColors.mutedLight,
                     size: 20,
                   ),
-                  onPressed: () => setState(() => _hidePassword = !_hidePassword),
+                  onPressed: () =>
+                      setState(() => _hidePassword = !_hidePassword),
                 ),
               ),
 
@@ -166,11 +172,13 @@ class _LoginPageState extends State<LoginPage> {
                       ? const SizedBox(
                           height: 20,
                           width: 20,
-                          child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                          child: CircularProgressIndicator(
+                              color: Colors.white, strokeWidth: 2),
                         )
                       : const Text(
                           'Login',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                 ),
               ),
@@ -182,7 +190,8 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     'New to TruckView? ',
                     style: TextStyle(
-                      color: isDark ? AppColors.mutedDark : AppColors.mutedLight,
+                      color:
+                          isDark ? AppColors.mutedDark : AppColors.mutedLight,
                       fontSize: 14,
                     ),
                   ),
