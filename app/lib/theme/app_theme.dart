@@ -7,7 +7,7 @@ class AppTheme {
     return ThemeData(
       primaryColor: AppColors.brandNavy,
       scaffoldBackgroundColor: AppColors.pageLight,
-      textTheme: GoogleFonts.outfitTextTheme(),
+      textTheme: GoogleFonts.poppinsTextTheme(),
       colorScheme: const ColorScheme.light(
         primary: AppColors.brandNavy,
         secondary: AppColors.brandOrange,
@@ -56,7 +56,7 @@ class AppTheme {
     return ThemeData(
       primaryColor: AppColors.brandNavy,
       scaffoldBackgroundColor: AppColors.pageDark,
-      textTheme: GoogleFonts.outfitTextTheme(ThemeData.dark().textTheme),
+      textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
       colorScheme: const ColorScheme.dark(
         primary: AppColors.brandOrange,
         secondary: AppColors.brandOrange,
